@@ -1,4 +1,44 @@
-$roboto: './fonts/Roboto-';
-$poppins: './fonts/Poppins-';
+$urlFonts: "./fonts";
+$roboto: "Roboto";
+$poppins: "Poppins";
+$jetBrainsMono: "JetBrainsMono";
+$formatTtf: "ttf";
+$formatWoff: "woff2";
 
-@for 
+$fonts: (
+  $roboto: (
+    400: "#{$urlFonts}/Roboto-Regular.#{$formatTtf}",
+    500: "#{$urlFonts}/Roboto-Medium.#{$formatTtf}",
+    700: "#{$urlFonts}/Roboto-Bold.#{$formatTtf}",
+  ),
+  $poppins: (
+    400: "#{$urlFonts}/Poppins-Regular.#{$formatTtf}",
+    500: "#{$urlFonts}/Poppins-Medium.#{$formatTtf}",
+    700: "#{$urlFonts}/Poppins-Bold.#{$formatTtf}",
+  ),
+  $jetBrainsMono: (
+    400: "#{$urlFonts}/JetBrainsMono-Regular.#{$formatWoff}",
+    500: "#{$urlFonts}/JetBrainsMono-Medium.#{$formatWoff}",
+    700: "#{$urlFonts}/JetBrainsMono-Bold.#{$formatWoff}",
+    800: "#{$urlFonts}/JetBrainsMono-ExtraBold.#{$formatWoff}",
+  ),
+);
+
+@mixin font-face($font-name, $weight, $file-path, $format: "truetype") {
+  @font-face {
+    font-family: #{$font-name};
+    font-weight: $weight;
+    font-style: normal;
+    src: url(#{$file-path}) format(#{$format});
+  }
+}
+
+@each $font-name, $variants in $fonts {
+  @each $weight, $file-path in $variants {
+    @if $font-name == $roboto or $font-name == $poppins {
+      @include font-face($font-name, $weight, $file-path);
+    } @else {
+      @include font-face($font-name, $weight, $file-path, $formatWoff);
+    }
+  }
+}
