@@ -1,19 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+/* Use */
+@use "../public/assets/fonts";
+
+/* Imports */
+@import "../node_modules/normalize-scss/sass/normalize";
+
+/* Global include */
+@include normalize();
+
 :root {
   /* Colors */
   --color-white: #ffffff;
   --color-athens-gray: #f7f8fa;
-  --color-silver-tree: #56b280;
-  --color-main-shaft: #272727;
-  --color-ebony-clay: #1d252c;
+  --color-heliotrope: #ae7aff;
+  --color-peach-yellow: #fae8a4;
+  --color-tonys-pink: #e99898;
+  --color-algae-green: #98e9ab;
+  --color-mine-shaft: #272727;
   --color-black: #000000;
 
   /* Fonts Size */
-  --font-size-title: 40px;
-  --font-size-subtitle: 18px;
-  --font-size-text: 16px;
+  --font-size-title: 48px;
+  --font-size-small-title: 36px;
+  --font-size-subtitle: 16px;
+  --font-size-text: 14px;
 
   /* Font Family */
-  --font-family-poppins: 'Poppins', sans-serif;
-  --font-family-roboto: 'Roboto', sans-serif;
+  --font-family-poppins: "Poppins", sans-serif;
+  --font-family-roboto: "Roboto", sans-serif;
+  --font-family-jetbrains-mono: "JetBrainsMono", sans-serif;
+
+  /* Border */
+  --border-solid-xs: 1px solid;
+  --border-solid-s: 2px solid;
+  --border-solid-l: 4px solid;
+
+  /* Rounded */
+  --border-rounded-xs: 1px;
+  --border-rounded-s: 2px;
+  --border-rounded-l: 4px;
+  --border-rounded-full: 50%;
+}
+
+html {
+  font-size: var(--font-size-text);
+  font-family: var(--font-family-jetbrains-mono);
+
+  box-sizing: border-box;
+}
+
+body {
+  width: 100dvw;
+  height: 100dvh;
+
+  background-image: url(../public/assets/images/bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  color: var(--color-athens-gray);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 800;
+}
+
+h1 {
+  font-size: var(--font-size-title);
+  line-height: 56px;
+}
+
+h2 {
+  font-size: var(--font-size-small-title);
+  line-height: 46px;
+}
+
+h3 {
+  font-size: var(--font-size-subtitle);
+  line-height: 24px;
+}
+
+p {
+  font-size: var(--font-size-text);
+  font-weight: 400;
 }
