@@ -66,6 +66,7 @@
     }
 
     &-error {
+      color: var(--color-tonys-pink);
       border-color: var(--color-tonys-pink);
 
       &::placeholder {

@@ -18,23 +18,23 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class LoginComponent {
   private _authService = inject(AuthService);
-  isError = {
-    username: false,
-    password: false,
-  };
+  isError = false;
 
   form = new FormGroup({
-    username: new FormControl<null | string>(null, Validators.required),
-    password: new FormControl<null | string>(null, Validators.required),
+    username: new FormControl<string>('', Validators.required),
+    password: new FormControl<string>('', Validators.required),
   });
+
+  getIsValid(formItem: 'username' | 'password') {
+    const value = this.form.controls[`${formItem}`];
+    return value.invalid && (value.dirty || value.touched);
+  }
 
   onSubmit() {
     if (this.form.valid) {
       //@ts-ignore
       this._authService.login(this.form.value);
     } else {
-      this.isError.password = !this.form.value.password;
-      this.isError.username = !this.form.value.username;
     }
   }
 }
