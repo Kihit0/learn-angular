@@ -3,18 +3,30 @@
     <div class="login__wrapper">
       <h1 class="login__title">Вход</h1>
       <label class="login__label">
-        <span class="login__text">Telegram username</span>
+        <span
+          class="login__text"
+          [class]="{ 'login__text-error': isError.username }"
+        >
+          Telegram username
+        </span>
         <input
           class="login__input"
+          [class]="{ 'login__input-error': isError.username }"
           formControlName="username"
           type="text"
           placeholder="Введите логин"
         />
       </label>
       <label class="login__label">
-        <span class="login__text">Пароль</span>
+        <span
+          class="login__text"
+          [class]="{ 'login__text-error': isError.password }"
+        >
+          Пароль
+        </span>
         <input
           class="login__input"
+          [class]="{ 'login__input-error': isError.password }"
           formControlName="password"
           type="text"
           placeholder="Введите пароль"

@@ -41,6 +41,10 @@
     font-weight: 700;
 
     padding-bottom: 8px;
+
+    &-error {
+      color: var(--color-tonys-pink);
+    }
   }
 
   &__input {
@@ -59,6 +63,14 @@
 
     &::placeholder {
       font-family: var(--font-family-jetbrains-mono);
+    }
+
+    &-error {
+      border-color: var(--color-tonys-pink);
+
+      &::placeholder {
+        color: var(--color-tonys-pink);
+      }
     }
   }
 

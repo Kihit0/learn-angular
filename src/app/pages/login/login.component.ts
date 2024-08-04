@@ -17,7 +17,11 @@ import { AuthService } from '../../auth/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  authService = inject(AuthService);
+  private _authService = inject(AuthService);
+  isError = {
+    username: false,
+    password: false,
+  };
 
   form = new FormGroup({
     username: new FormControl<null | string>(null, Validators.required),
@@ -27,9 +31,10 @@ export class LoginComponent {
   onSubmit() {
     if (this.form.valid) {
       //@ts-ignore
-      this.authService.login(this.form.value).subscribe((s) => {
-        console.log(s);
-      });
+      this._authService.login(this.form.value);
+    } else {
+      this.isError.password = !this.form.value.password;
+      this.isError.username = !this.form.value.username;
     }
   }
 }
