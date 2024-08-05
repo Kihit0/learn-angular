@@ -40,13 +40,23 @@
   --border-rounded-s: 2px;
   --border-rounded-l: 4px;
   --border-rounded-full: 50%;
+
+  /* Transitions */
+  --transition-delay: 0.2s;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
 }
 
 html {
   font-size: var(--font-size-text);
   font-family: var(--font-family-jetbrains-mono);
-
-  box-sizing: border-box;
 }
 
 body {
@@ -87,4 +97,12 @@ h3 {
 p {
   font-size: var(--font-size-text);
   font-weight: 400;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+  padding-inline: 20px;
 }

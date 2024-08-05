@@ -1,1 +1,47 @@
-<p>login works!</p>
+<div class="login container">
+  <form class="login__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="login__wrapper">
+      <h1 class="login__title">Вход</h1>
+      <label class="login__label">
+        <span
+          class="login__text"
+          [class]="{
+            'login__text-error': getIsValid('username')
+          }"
+        >
+          Telegram username
+        </span>
+        <input
+          class="login__input"
+          [class]="{
+            'login__input-error': getIsValid('username')
+          }"
+          formControlName="username"
+          type="text"
+          placeholder="Введите логин"
+        />
+      </label>
+      <label class="login__label">
+        <span
+          class="login__text"
+          [class]="{ 'login__text-error': getIsValid('password') }"
+        >
+          Пароль
+        </span>
+        <input
+          class="login__input"
+          [class]="{ 'login__input-error': getIsValid('password') }"
+          formControlName="password"
+          type="text"
+          placeholder="Введите пароль"
+        />
+      </label>
+      <div class="login__btn">
+        <app-button [type]="'submit'">Войти</app-button>
+      </div>
+    </div>
+  </form>
+  <div class="login__logo">
+    <app-logo [size]="{ width: '440px', height: '410px' }"></app-logo>
+  </div>
+</div>
