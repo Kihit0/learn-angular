@@ -6,7 +6,7 @@
         <span
           class="login__text"
           [class]="{
-            'login__text-error': isError || getIsValid('username')
+            'login__text-error': getIsValid('username')
           }"
         >
           Telegram username
@@ -14,7 +14,7 @@
         <input
           class="login__input"
           [class]="{
-            'login__input-error': isError || getIsValid('username')
+            'login__input-error': getIsValid('username')
           }"
           formControlName="username"
           type="text"
@@ -24,13 +24,13 @@
       <label class="login__label">
         <span
           class="login__text"
-          [class]="{ 'login__text-error': isError || getIsValid('password') }"
+          [class]="{ 'login__text-error': getIsValid('password') }"
         >
           Пароль
         </span>
         <input
           class="login__input"
-          [class]="{ 'login__input-error': isError || getIsValid('password') }"
+          [class]="{ 'login__input-error': getIsValid('password') }"
           formControlName="password"
           type="text"
           placeholder="Введите пароль"

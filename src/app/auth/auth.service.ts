@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BASE_URL } from '../constants/constants';
 import { TokenResponse } from './auth.type';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -20,13 +20,25 @@ export class AuthService {
     refresh_token: '',
   };
 
+  private _saveTokens(res: TokenResponse) {
+    this._router.navigate(['']);
+    this._token = res;
+
+    this._cookieService.set('token', this._token.access_token);
+    this._cookieService.set('refreshToken', this._token.refresh_token);
+  }
+
+  get getToken() {
+    return this._token;
+  }
+
   get isAuth() {
-    /*     if (!this._token.access_token) {
+    if (!this._token.access_token) {
       this._token = {
         access_token: this._cookieService.get('token'),
         refresh_token: this._cookieService.get('refreshToken'),
       };
-    } */
+    }
 
     return !!this._token.access_token;
   }
@@ -37,14 +49,33 @@ export class AuthService {
     fd.append('username', payload.username);
     fd.append('password', payload.password);
 
-    return this._http.post<TokenResponse>(`${this._endpoint}/token`, fd).pipe(
-      tap((val) => {
-        this._router.navigate(['']);
-        this._token = val;
+    return this._http
+      .post<TokenResponse>(`${this._endpoint}/token`, fd)
+      .pipe(tap((val) => this._saveTokens(val)));
+  }
 
-        this._cookieService.set('token', this._token.access_token);
-        this._cookieService.set('refreshToken', this._token.refresh_token);
+  logout() {
+    this._cookieService.deleteAll();
+    this._token = {
+      access_token: '',
+      refresh_token: '',
+    };
+
+    this._router.navigate(['/login']);
+  }
+
+  refreshAuthToken() {
+    return this._http
+      .post<TokenResponse>(`${this._endpoint}/refresh`, {
+        refresh_token: this._token.refresh_token,
       })
-    );
+      .pipe(
+        tap((val) => this._saveTokens(val)),
+        catchError((err) => {
+          this.logout();
+
+          return throwError(err);
+        })
+      );
   }
 }

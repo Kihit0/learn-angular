@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class LoginComponent {
   private _authService = inject(AuthService);
-  isError = false;
+  private _router = inject(Router);
 
   form = new FormGroup({
     username: new FormControl<string>('', Validators.required),
@@ -27,14 +28,17 @@ export class LoginComponent {
 
   getIsValid(formItem: 'username' | 'password') {
     const value = this.form.controls[`${formItem}`];
-    return value.invalid && (value.dirty || value.touched);
+    const isValid = value.invalid && (value.dirty || value.touched);
+
+    return isValid;
   }
 
   onSubmit() {
     if (this.form.valid) {
       //@ts-ignore
-      this._authService.login(this.form.value);
-    } else {
+      this._authService.login(this.form.value).subscribe((res) => {
+        this._router.navigate(['']);
+      });
     }
   }
 }
