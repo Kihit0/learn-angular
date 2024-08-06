@@ -11,15 +11,25 @@
         >
           Telegram username
         </span>
-        <input
-          class="login__input"
-          [class]="{
-            'login__input-error': getIsValid('username')
-          }"
-          formControlName="username"
-          type="text"
-          placeholder="Введите логин"
-        />
+        <div class="login__username">
+          <input
+            class="login__input"
+            [class]="{
+              'login__input-error': getIsValid('username')
+            }"
+            formControlName="username"
+            type="text"
+            placeholder="Введите логин"
+          />
+          <a
+            class="login__icon"
+            href="http://t.me/icherniakov_info_bot"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <app-icon-telegram></app-icon-telegram>
+          </a>
+        </div>
       </label>
       <label class="login__label">
         <span
@@ -28,13 +38,25 @@
         >
           Пароль
         </span>
-        <input
-          class="login__input"
-          [class]="{ 'login__input-error': getIsValid('password') }"
-          formControlName="password"
-          type="text"
-          placeholder="Введите пароль"
-        />
+        <div class="login__password">
+          <input
+            class="login__input"
+            [class]="{ 'login__input-error': getIsValid('password') }"
+            formControlName="password"
+            [type]="isPasswordShow() ? 'text' : 'password'"
+            placeholder="Введите пароль"
+          />
+          <button
+            class="login__icon"
+            (click)="isPasswordShow.set(!isPasswordShow())"
+          >
+            <app-icon-password
+              [color]="
+                isPasswordShow() ? 'var(--color-heliotrope)' : '#FFFFFFBF'
+              "
+            ></app-icon-password>
+          </button>
+        </div>
       </label>
       <div class="login__btn">
         <app-button [type]="'submit'">Войти</app-button>

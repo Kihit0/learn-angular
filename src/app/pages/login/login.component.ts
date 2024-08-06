@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { LogoComponent } from '../../ux/logo/logo.component';
 import { ButtonComponent } from '../../ui/button/button.component';
 import {
@@ -9,17 +9,25 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { IconsComponent } from '../../ux/icons/icons.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [LogoComponent, ButtonComponent, ReactiveFormsModule],
+  imports: [
+    LogoComponent,
+    ButtonComponent,
+    ReactiveFormsModule,
+    IconsComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   private _authService = inject(AuthService);
   private _router = inject(Router);
+
+  isPasswordShow = signal<boolean>(false);
 
   form = new FormGroup({
     username: new FormControl<string>('', Validators.required),

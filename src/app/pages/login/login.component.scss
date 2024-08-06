@@ -48,6 +48,9 @@
   }
 
   &__input {
+    display: block;
+    width: 100%;
+
     padding: 8px 20px;
 
     color: var(--color-athens-gray);
@@ -73,6 +76,25 @@
         color: var(--color-tonys-pink);
       }
     }
+  }
+
+  &__username,
+  &__password {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+
+    background-color: transparent;
+
+    border: none;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
   }
 
   &__btn {
