@@ -99,6 +99,15 @@ p {
   font-weight: 400;
 }
 
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .container {
   width: 100%;
   max-width: 1400px;

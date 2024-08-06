@@ -1,0 +1,38 @@
+<div class="sidebar">
+  <div class="sidebar__wrapper">
+    <div class="sidebar__top">
+      <div class="sidebar__logo">
+        <a class="sidebar__link" [routerLink]="['/search']">
+          <app-logo [size]="{ width: '61px', height: '74px' }"></app-logo>
+        </a>
+      </div>
+      <nav class="sidebar__nav">
+        <ul class="sidebar__list">
+          @for (item of data; track $index) {
+          <li class="sidebar__item">
+            <a
+              class="sidebar__link"
+              [class.active]="item.url === activeUrl"
+              [routerLink]="[item.url]"
+            >
+              <span class="sidebar__icon">
+                <ng-container
+                  *ngComponentOutlet="
+                    item.icon;
+                    injector: getInjectorItem(item)
+                  "
+                ></ng-container>
+              </span>
+              <span>{{ item.text }}</span>
+            </a>
+          </li>
+          }
+        </ul>
+      </nav>
+      <div class="sidebar__subscribers">Subscribers</div>
+    </div>
+    <div class="sidebar__footer">
+      <div class="sidebar__profile">Profile</div>
+    </div>
+  </div>
+</div>

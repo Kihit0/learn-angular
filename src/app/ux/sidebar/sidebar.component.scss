@@ -1,0 +1,55 @@
+.sidebar {
+  height: 100dvh;
+  padding: 20px 28px;
+
+  background: var(--color-mine-shaft);
+  background: linear-gradient(180deg, var(--color-mine-shaft) 0%, #131313 50%);
+
+  box-shadow: 2px 0 4px #131313;
+
+  &__wrapper {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__top {
+    flex: 1 0 auto;
+  }
+
+  &__footer {
+    flex: 0 0 auto;
+  }
+
+  &__logo {
+    margin-bottom: 20px;
+  }
+
+  &__nav {
+    margin-bottom: 20px;
+  }
+
+  &__item {
+    padding-block: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__link {
+    font-weight: 700;
+
+    &.active {
+      color: var(--color-heliotrope);
+    }
+  }
+
+  &__icon {
+    display: inline-block;
+    margin-right: 12px;
+  }
+
+  &__profile {
+    padding: 5px 20px;
+    background-color: var(--color-mine-shaft);
+  }
+}
